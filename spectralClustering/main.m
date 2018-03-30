@@ -14,9 +14,12 @@ FileName = fullfile(FileName);
 Img = imread(FileName);
 
 %%%% Used to read .mat files from thhe given folder %%%%
+matData = load('C:\Users\FoxRiver-Yoga\OneDrive\Academic\Spring 2018\CAP6610\project1\PaviaRGB.mat');
+%imshow(input_data.PaviaRGB);
 %FileName = 'C:\Users\FoxRiver-Yoga\OneDrive\Academic\Spring 2018\CAP6610\project1\ImsAndSegs\ImsAndTruths100075.mat';
 %ImsAndSegs = load(FileName);
 %Img = ImsAndSegs.Im; 
+Img = matData.PaviaRGB; 
 
 [m, n, d] = size(Img);
 
