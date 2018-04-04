@@ -37,7 +37,7 @@ function index = MyMartinIndex9Helper(A, B)
     for i=1:M
         CountA(i) = sum(A(:)==i);
     end
-    for i=1:M
+    for i=1:N
         CountB(i) = sum(B(:)==i);
     end
      
