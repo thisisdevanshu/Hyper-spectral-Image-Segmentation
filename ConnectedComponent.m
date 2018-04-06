@@ -1,5 +1,8 @@
 function[CCIm] = connectedComponents(clusterIm,clustNum,m,n)
     CCIm = zeros(m*n,1);
+    mask = gausswin(6);
+    mask = mask*mask';
+    mask = mask/sum(mask);
     %connected component count
     count = 1;
     for clust = 1:clustNum
@@ -10,20 +13,25 @@ function[CCIm] = connectedComponents(clusterIm,clustNum,m,n)
                 bw(itr) = 1;
             end
         end
-        %finding the connected componets
+ 
+        bw = reshape(bw,m,n);
         cc = bwconncomp(bw);
+        
         componentsFound = size(cc.PixelIdxList,2);
         for itr = 1:componentsFound
             pointsInComponent = size(cc.PixelIdxList{itr},1);
+            cc.PixelIdxList{itr}
             for jtr = 1:pointsInComponent
                 imageIndex = cc.PixelIdxList{itr}(jtr);
+               %imageIndex
                 CCIm(imageIndex) = count; 
             end
+            %CCIm
             count = count + 1;
         end
         
     end
-    
+    %CCIm
     CCIm = reshape(CCIm,m,n);
 
 end
