@@ -1,41 +1,25 @@
+
 function [ClusterIm, CCIm] = MyKMeans8(Image, ImageType, NumClusts)
     [m, n, colors] = size(Image);
-    k=1;
     if(strcmp('RGB',ImageType)==1)
-       
-        changedMatrix = double(zeros(m*n,3));
-        for i=1:n
-            for j=1:m
-                changedMatrix(k,1) = Image(j,i,1);
-                changedMatrix(k,2) = Image(j,i,2);
-                changedMatrix(k,3) = Image(j,i,3);
-                k=k+1;
-            end
-        end 
-        
-        [IDX, C] = kmeans(changedMatrix, NumClusts);
-    
-        ClusterIm = zeros(m,n);
-        r=1;
-        c=1;
-        for i=1:m*n  
-            ClusterIm(c, r) = uint16(IDX(i)); 
-            c=c+1;
-            if c>m
-                c=1;
-                r=r+1;
-            end
-        end
-        CCIm = 1;
-        %TODO: Populate CCIM
+        R = data(:,:,1);
+        G = data(:,:,2);
+        B = data(:,:,3);
+        R = double(R);
+        G = double(G);
+        B = double(B);
+        R = R(:);
+        G = G(:);
+        B = B(:);
+        data = [R,G,B];
     end
-    
-    %imagesc(reshape(ClusterIm,321,481));
+    if(strcmp('Hyper',ImageType)==1)
+        b = 20;
+        [Y, U, Lambda, Mu] = PCAbyDG(data,b);
+        data = Y;
+    end
+    [IDX, C] = kmeans(data, NumClusts);
+    ClusterIm = IDX;
+    CCIm = ConnectedComponent(IDX,NumClusts,m,n);
+    imagesc(CCIm);
 end
- %%
- disp('Running Kmeans...') 
- ClusterIm = [];
- CCIm = [];
- %%
- 
-return
