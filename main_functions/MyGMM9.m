@@ -1,4 +1,4 @@
-function [ClusterIm, CCIm] = MyGMM9(Im, ImageType, NumClusts);
+function [ClusterIm, CCIm] = MyGMM9(data, ImageType, NumClusts);
 m = size(data,1);
 n = size(data,2);
 b = size(data,3);
@@ -20,9 +20,9 @@ if(strcmp('Hyper',ImageType)==1)
     data = Y;
 end
 
-GMMmodel = fitgmdist(data,clustNum,'CovType','diagonal');
+GMMmodel = fitgmdist(data,NumClusts,'CovType','diagonal');
 ClusterIm = cluster(GMMmodel, data);
 
 %imagesc(reshape(ClusterIm,m,n));
-CCIm = ConnectedComponent(ClusterIm,clustNum,m,n);
-imagesc( CCIm );
+CCIm = ConnectedComponent(ClusterIm,NumClusts,m,n);
+%imagesc( CCIm );

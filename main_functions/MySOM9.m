@@ -1,4 +1,4 @@
-function [ClusterIm, CCIm] = MySOM9(Im, ImageType, clustNum);
+function [ClusterIm, CCIm] = MySOM9(data, ImageType, clustNum);
 m = size(data,1);
 n = size(data,2);
 b = size(data,3);

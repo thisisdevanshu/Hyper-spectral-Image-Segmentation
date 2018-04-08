@@ -1,4 +1,4 @@
-function [ClusterIm, CCIm] = MyFCM9(Im, ImageType, NumClusts);
+function [ClusterIm, CCIm] = MyFCM9(Image, ImageType, NumClusts);
 [m, n, b] = size(Image);
     data = Image;
     if(strcmp('RGB',ImageType)==1)

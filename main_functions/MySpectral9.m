@@ -7,7 +7,7 @@ function [ClusterIm, CCIm] = MySpectral9(Im, ImageType, NumClusts);
  %%
  
  k         = NumClusts;          % Number of Clusters
- Neighbors = 100;         % Number of Neighbors
+ Neighbors = 10;         % Number of Neighbors
 
  roundColors = 1;        % Round color values for less strict uniqueness
  roundDigits = 2;        % Precision for Uniqueness

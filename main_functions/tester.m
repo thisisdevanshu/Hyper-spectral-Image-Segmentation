@@ -1,8 +1,11 @@
 close all;clear all;
-matData = load('PaviaHyperIm.mat');
+matData = load('ImsAndTruths113044.mat');
 
-Img = matData.PaviaHyperIm; 
+Img = matData.Im; 
 
-[ClusterIm, CCIm] = MyClust9(Img,'Algorithm', 'GMM', 'ImType', 'Hyper', 'NumClusts', 3);
+[ClusterIm, CCIm] = MyClust9(Img,'Algorithm', 'Kmeans', 'ImType', 'RGB', 'NumClusts', 3);
 
-imagesc(CCIm);
+[m,n] = size(CCIm);
+ClusterIm = reshape(ClusterIm, [m,n]);
+
+imagesc(ClusterIm);
