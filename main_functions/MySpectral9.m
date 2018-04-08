@@ -7,9 +7,9 @@ function [ClusterIm, CCIm] = MySpectral9(Im, ImageType, NumClusts);
  %%
  
  k         = NumClusts;          % Number of Clusters
- Neighbors = 10;         % Number of Neighbors
+ Neighbors = 100;         % Number of Neighbors
 
- roundColors = 0;        % Round color values for less strict uniqueness
+ roundColors = 1;        % Round color values for less strict uniqueness
  roundDigits = 2;        % Precision for Uniqueness
  saveData    = 0;        % Save Dataset
  markEdges   = 0;        % Outline edges
@@ -31,6 +31,11 @@ Img = Im; %imread(FileName);
 
 [m, n, d] = size(Img);
 
+if(strcmp('Hyper',ImageType)==1)
+    b = 20;
+    [Y, U, Lambda, Mu] = PCAbyDG(Img,b);
+    Data = Y;
+end
 % convert into list of data points
 Data = reshape(Img, 1, m * n, []);
 
@@ -42,7 +47,13 @@ end
 Data = double(Data);
 Data = normalizeData(Data);
 
-rData = Data;
+% Find unique colors
+if isequal(roundColors, 1)
+    fac = 10^roundDigits;
+    rData = round(Data * fac) / fac;
+else
+    rData = Data;
+end
 
 [~, ind, order] = unique(rData', 'rows', 'R2012a');
 
@@ -59,7 +70,7 @@ try
 end
 
 fprintf('Clustering Data...\n');
-C = SpectralClustering(SimGraph, k, 2);
+C = SpectralClustering(SimGraph, k, 3);
 
 %ConnImg = SpectralClustering(SimGraph, k, 2);
 
@@ -71,31 +82,33 @@ D = D(order);
 S = reshape(D, m, n);
 
 % choose colormap
-if k == 2
-    map = [0 0 0; 1 1 1];
-else
-    map = zeros(3, k);
+%if k == 2
+%    map = [0 0 0; 1 1 1];
+%else
+%    map = zeros(3, k);
     
-    for ii = 1:k
-        ind = find(D == ii, 1);
-        map(:, ii) = rData(:, ind);
-    end
-    
-    map = map';
-end
+%    for ii = 1:k
+%        ind = find(D == ii, 1);
+%        map(:, ii) = rData(:, ind);
+%    end
+%    
+%    map = map';
+%end
 
 % plot image
 set(gca, 'Position', [0 0 1 1], 'Units', 'Normalized');
 ClusterIm = S;
 
-imshow(S, map, 'Border', 'tight');
+%imshow(S, map, 'Border', 'tight');
 %imshow(S,map);
+%hold on;
 
-hold on;
+%axis off;
+%truesize;
+%hold off;
+%pause;
 
-axis off;
-truesize;
-hold off;
-pause;
-
+IDX=reshape(ClusterIm,[m*n,1]);
+CCIm = ConnectedComponent(IDX,NumClusts,m,n);
+    
 return

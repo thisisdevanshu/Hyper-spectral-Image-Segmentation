@@ -3,6 +3,7 @@ function [ClusterIm, CCIm] = MyClust9(Im, varargin);
 
  %%
  addpath(genpath('helpers'))
+ addpath(genpath('ImsAndSegs'))
  
  %initialize optional parameters
  if ~any(strcmp(varargin,'Algorithm'))

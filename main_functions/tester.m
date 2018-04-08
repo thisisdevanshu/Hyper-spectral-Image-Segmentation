@@ -1,6 +1,8 @@
 close all;clear all;
-matData = load('ImsAndTruths2092.mat');
+matData = load('PaviaHyperIm.mat');
 
-Img = matData.Im; 
+Img = matData.PaviaHyperIm; 
 
-[ClusterIm, CCIm] = MyClust9(Img,'Algorithm', 'Spectral', 'ImType', 'RGB', 'NumClusts', 3);
+[ClusterIm, CCIm] = MyClust9(Img,'Algorithm', 'GMM', 'ImType', 'Hyper', 'NumClusts', 3);
+
+imagesc(CCIm);

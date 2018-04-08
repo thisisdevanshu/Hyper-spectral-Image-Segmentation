@@ -1,4 +1,3 @@
-
 function [ClusterIm, CCIm] = MyKMeans8(Image, ImageType, NumClusts)
     [m, n, colors] = size(Image);
     data = Image;

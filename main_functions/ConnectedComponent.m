@@ -1,4 +1,5 @@
 function[CCIm] = connectedComponents(clusterIm,clustNum,m,n)
+    disp('getting conn comp');
     CCIm = zeros(m*n,1);
     mask = gausswin(6);
     mask = mask*mask';
@@ -33,5 +34,4 @@ function[CCIm] = connectedComponents(clusterIm,clustNum,m,n)
     end
     %CCIm
     CCIm = reshape(CCIm,m,n);
-
 end
