@@ -24,10 +24,8 @@ function [ClusterIm, CCIm] = MyClust9(Im, varargin);
      % third parameter does not exist, so default it to something
      NumClusts = 3; %to do
  else
+     if NumClusts   
      NumClusts = varargin{(find(strcmp(varargin, 'NumClusts')))+1};
-     if NumClusts == 1
-         NumClusts = 7;
-     end
  end
  
  %print config parameters to console
