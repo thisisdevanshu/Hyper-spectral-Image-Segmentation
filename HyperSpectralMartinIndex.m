@@ -1,9 +1,10 @@
-function index  = MyMartinIndex9(A,B)
-    index = min(MyMartinIndex9Helper(A,B), MyMartinIndex9Helper(B,A));
+function index  = HyperSpectralMartinIndex(ClusterIm,GroundTruth, mask)
+    ClusterIm = ClusterIm.*mask;
+    index = min(HyperSpectralMartinIndexHelper(ClusterIm,GroundTruth), HyperSpectralMartinIndexHelper(GroundTruth,ClusterIm));
 end
 
 %% Helper method to calculate Martin Index %%
-function index = MyMartinIndex9Helper(A, B) 
+function index = HyperSpectralMartinIndexHelper(A, B) 
     [PixelR,PixelC] = size(A);
     M = max(max(A));
     N = max(max(B));
@@ -20,15 +21,19 @@ function index = MyMartinIndex9Helper(A, B)
     %% Populating Intersection matrix %%
     for i=1:PixelR
         for j=1:PixelC
-            Intersection(A(i,j),B(i,j))= Intersection(A(i,j),B(i,j)) +1;
+            if(A(i,j) ~= 0 && B(i,j) ~= 0)
+                Intersection(A(i,j),B(i,j))= Intersection(A(i,j),B(i,j)) +1;
+            end
         end
     end
     
     %% Populating Union matrix %%
     for i = 1:PixelR
         for j = 1:PixelC
-            if Intersection(A(i,j),B(i,j)) ~= 0 && Union(A(i,j), B(i,j)) == 0
-                Union(A(i,j),B(i,j)) = sum(A(:)==A(i,j)) + sum(B(:)==B(i,j)) - Intersection(A(i,j),B(i,j));
+            if(A(i,j) ~= 0 && B(i,j) ~= 0)
+                if Intersection(A(i,j),B(i,j)) ~= 0 && Union(A(i,j), B(i,j)) == 0
+                    Union(A(i,j),B(i,j)) = sum(A(:)==A(i,j)) + sum(B(:)==B(i,j)) - Intersection(A(i,j),B(i,j));
+                end
             end
         end
     end
