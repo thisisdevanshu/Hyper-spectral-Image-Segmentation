@@ -1,4 +1,4 @@
-function index  = HyperSpectralMartinIndex(ClusterIm,GroundTruth, mask)
+function index  = MyClustEvalHyper9(ClusterIm,GroundTruth, mask)
     ClusterIm = ClusterIm.*mask;
     index = min(HyperSpectralMartinIndexHelper(ClusterIm,GroundTruth), HyperSpectralMartinIndexHelper(GroundTruth,ClusterIm));
 end
