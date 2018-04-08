@@ -20,6 +20,6 @@ function [ClusterIm, CCIm] = MyKMeans8(Image, ImageType, NumClusts)
     end
     [IDX, C] = kmeans(data, NumClusts);
     ClusterIm = IDX;
-    CCIm = ConnectedComponent(IDX,NumClusts,m,n);
+    CCIm = ConnectedComponents(IDX,NumClusts,m,n);
     imagesc(CCIm);
 end

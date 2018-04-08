@@ -63,6 +63,6 @@ for itr=1:3
     sigN = sig0*exp(-itr/tau1);
 end
 ClusterIm = out;
-CCIm = ConnectedComponent(ClusterIm,clustNum,m,n);
+CCIm = ConnectedComponents(ClusterIm,clustNum,m,n);
 ClusterIm = reshape(ClusterIm,m,n);
 imagesc( imgaussfilt(CCIm,1));

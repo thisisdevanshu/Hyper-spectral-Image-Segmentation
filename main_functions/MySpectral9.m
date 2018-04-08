@@ -109,6 +109,6 @@ ClusterIm = S;
 %pause;
 
 IDX=reshape(ClusterIm,[m*n,1]);
-CCIm = ConnectedComponent(IDX,NumClusts,m,n);
+CCIm = ConnectedComponents(IDX,NumClusts,m,n);
     
 return

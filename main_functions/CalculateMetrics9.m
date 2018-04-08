@@ -1,4 +1,4 @@
-function [output] = CalculateMetrics() 
+function [output] = CalculateMetrics9() 
     addpath(genpath('helpers'))
     % Provide local path for ImsAndSegs folder
     Images = dir('C:\Users\FoxRiver-Yoga\Documents\ImsAndSegs3');
@@ -13,7 +13,7 @@ function [output] = CalculateMetrics()
         for j = 2:7
             % Change to algorithm for which metric has to be calculated
             %[ClusterIm, CCIm] = MySpectral9(LoadedImage.Im, 'RGB', j);
-            [ClusterIm, CCIm] = MyClust9(LoadedImage.Im,'Algorithm', 'Spectral', 'ImType', 'RGB', 'NumClusts', j);
+            [ClusterIm, CCIm] = MyClust9(LoadedImage.Im,'Algorithm', 'Kmeans', 'ImType', 'RGB', 'NumClusts', j);
            
             a = MyMartinIndex9(CCIm, LoadedImage.Seg1);
             b = MyMartinIndex9(CCIm, LoadedImage.Seg2);

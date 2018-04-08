@@ -27,6 +27,6 @@ function [ClusterIm, CCIm] = MyFCM9(Image, ImageType, NumClusts);
               ClusterIm(index(jtr)) = itr;  
           end
     end
-    CCIm = ConnectedComponent(ClusterIm,NumClusts,m,n);
+    CCIm = ConnectedComponents(ClusterIm,NumClusts,m,n);
     imagesc(CCIm);
 end

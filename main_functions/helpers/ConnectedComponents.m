@@ -1,4 +1,4 @@
-function[CCIm] = connectedComponents(clusterIm,clustNum,m,n)
+function[CCIm] = ConnectedComponents(clusterIm,clustNum,m,n)
     disp('getting conn comp');
     CCIm = zeros(m*n,1);
     mask = gausswin(6);

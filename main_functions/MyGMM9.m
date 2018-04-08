@@ -24,5 +24,5 @@ GMMmodel = fitgmdist(data,NumClusts,'CovType','diagonal');
 ClusterIm = cluster(GMMmodel, data);
 
 %imagesc(reshape(ClusterIm,m,n));
-CCIm = ConnectedComponent(ClusterIm,NumClusts,m,n);
+CCIm = ConnectedComponents(ClusterIm,NumClusts,m,n);
 %imagesc( CCIm );
