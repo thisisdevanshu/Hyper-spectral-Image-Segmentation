@@ -1,4 +1,4 @@
-function [ClusterIm, CCIm] = MyKMeans9(Image, ImageType, NumClusts)
+function [ClusterIm, CCIm] = MyKmeans9(Image, ImageType, NumClusts)
     [m, n, colors] = size(Image);
     data = Image;
     if(strcmp('RGB',ImageType)==1)
