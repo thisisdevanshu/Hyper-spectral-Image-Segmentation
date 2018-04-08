@@ -24,23 +24,23 @@ function index = MyMartinIndex9Helper(A, B)
         end
     end
     
-    %% Populating Union matrix %%
-    for i = 1:PixelR
-        for j = 1:PixelC
-            if Intersection(A(i,j),B(i,j)) ~= 0 && Union(A(i,j), B(i,j)) == 0
-                Union(A(i,j),B(i,j)) = sum(A(:)==A(i,j)) + sum(B(:)==B(i,j)) - Intersection(A(i,j),B(i,j));
-            end
-        end
-    end
-    
-    %% Populating CountA and CountB matrices %%
+     %% Populating CountA and CountB matrices %%
     for i=1:M
         CountA(i) = sum(A(:)==i);
     end
     for i=1:N
         CountB(i) = sum(B(:)==i);
     end
-     
+    
+    %% Populating Union matrix %%
+    for i = 1:PixelR
+        for j = 1:PixelC
+            if Intersection(A(i,j),B(i,j)) ~= 0 && Union(A(i,j), B(i,j)) == 0
+                Union(A(i,j),B(i,j)) = CountA(A(i,j)) + CountB(B(i,j)) - Intersection(A(i,j),B(i,j));
+            end
+        end
+    end
+    
     %% Calculating Wj %%
     for i=1:M
         Weight(i) = CountA(i)/sum(CountA);
