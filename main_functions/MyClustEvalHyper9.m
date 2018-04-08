@@ -1,8 +1,7 @@
 function index  = MyClustEvalHyper9(ClusterIm,GroundTruth, mask)
     [m,n] = size(mask);
     ClusterIm = reshape(ClusterIm, m, n);
-    size(ClusterIm)
-    size(mask)
+
     ClusterIm = ClusterIm.*mask;
     index = min(HyperSpectralMartinIndexHelper(ClusterIm,GroundTruth), HyperSpectralMartinIndexHelper(GroundTruth,ClusterIm));
 end
